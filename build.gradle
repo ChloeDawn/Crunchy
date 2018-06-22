@@ -5,14 +5,12 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.50'
     }
 }
 
-plugins {
-    id 'io.franzbecker.gradle-lombok' version '1.14'
-}
-
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'kotlin'
 
 version = modVersion
 group = 'net.insomniakitten.crunchy'
@@ -25,6 +23,14 @@ minecraft {
     runDir = 'run'
     replaceIn 'Crunchy.java'
     replace '%VERSION%', modVersion
+}
+
+repositories {
+    maven { url = 'http://maven.shadowfacts.net' }
+}
+
+dependencies {
+    compile 'net.shadowfacts:Forgelin:1.6.0'
 }
 
 processResources {
