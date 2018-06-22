@@ -1,0 +1,35 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://files.minecraftforge.net/maven' }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+version = modVersion
+group = 'net.insomniakitten.crunchy'
+archivesBaseName = 'Crunchy'
+sourceCompatibility = 1.8
+
+minecraft {
+    version = mcfVersion
+    mappings = mcpMappings
+    runDir = 'run'
+    replaceIn 'Crunchy.java'
+    replace '%VERSION%', modVersion
+}
+
+processResources {
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info', 'pack.mcmeta'
+        expand 'version': modVersion
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info', 'pack.mcmeta'
+    }
+}
