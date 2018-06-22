@@ -1,0 +1,9 @@
+[
+  {
+    "modid": "crunchy",
+    "name": "Crunchy",
+    "version": "${version}",
+    "authorList": [ "pau101", "InsomniaKitten" ],
+    "description": "https://twitter.com/insomniakitten/status/1009482030894198785"
+  }
+]
