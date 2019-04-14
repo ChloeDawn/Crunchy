@@ -5,5 +5,7 @@
   "description": "https://twitter.com/insomniakitten/status/1009482030894198785",
   "side": "client",
   "authors": [ "pau101", "InsomniaKitten" ],
-  "mixins": [ "mixins.crunchy.json" ]
+  "mixins": {
+    "common": "mixins.crunchy.json"
+  }
 }
