@@ -1,35 +1,36 @@
 buildscript {
-    repositories {
-        jcenter()
-        maven { url 'https://files.minecraftforge.net/maven' }
+  repositories {
+    jcenter()
+    maven {
+      name = 'fabricmc.net'
+      url = 'https://maven.fabricmc.net'
     }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-    }
+  }
+  dependencies {
+    classpath "net.fabricmc:fabric-loom:$loom"
+  }
 }
 
-apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'java'
+apply plugin: 'fabric-loom'
 
-version = modVersion
-group = 'net.insomniakitten.crunchy'
 archivesBaseName = 'Crunchy'
+group = 'io.github.insomniakitten'
+version = '2.0.0'
 sourceCompatibility = 1.8
 
 minecraft {
-    version = mcfVersion
-    mappings = mcpMappings
-    runDir = 'run'
-    replaceIn 'Crunchy.java'
-    replace '%VERSION%', modVersion
+  refmapName = 'mixins.crunchy.refmap.json'
+}
+
+dependencies {
+  minecraft "com.mojang:minecraft:$game"
+  mappings "net.fabricmc:yarn:$game+$mappings"
+  modCompile "net.fabricmc:fabric-loader:$loader"
 }
 
 processResources {
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info', 'pack.mcmeta'
-        expand 'version': modVersion
-    }
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info', 'pack.mcmeta'
-    }
+  from(sourceSets.main.resources.srcDirs) {
+    expand version: version, refmap: minecraft.refmapName
+  }
 }
